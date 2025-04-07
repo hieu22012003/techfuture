@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tư Vấn Nghề Nghiệp AI</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      background-color: #343541;
+      color: #ececf1;
+    }
+
+    /* Header Styles */
+    .header {
+      background-color: #202123;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid #444654;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #007bff; /* Changed from #10a37f to blue */
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.25rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: #ececf1;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #10a37f;
+    }
+
+    .auth-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .auth-button {
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .login {
+      background: transparent;
+      border: 1px solid #444654;
+      color: #ececf1;
+    }
+
+    .signup {
+      background: #10a37f;
+      border: none;
+      color: white;
+    }
+
+    .auth-button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    /* Main Content Area */
+    .main-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Bố cục trang với tỷ lệ 7/3 cho hai cột */
+    .content {
+      display: flex;
+      flex: 1;
+    }
+
+    /* Cột trò chuyện */
+    .chat-column {
+      flex: 7;
+      display: flex;
+      flex-direction: column;
+      border-right: 2px solid #444654;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    /* Khu vực hiển thị tin nhắn */
+    #chatbox {
+      flex: 1;
+      overflow-y: auto;
+      border: 1px solid #444654;
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 10px;
+      background-color: #202123;
+    }
+
+    /* Khung nhập tin nhắn */
+    .input-container {
+      display: flex;
+      gap: 10px;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 8px;
+      border: 1px solid #444654;
+      border-radius: 4px;
+      background-color: #343541;
+      color: #ececf1;
+    }
+
+    button {
+      padding: 8px 12px;
+      background-color: #10a37f;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0e8a6e;
+    }
+
+    /* Cột tra cứu */
+    .search-column {
+      flex: 3;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    /* Khu vực tra cứu */
+    .search-box {
+      border: 1px solid #444654;
+      border-radius: 8px;
+      padding: 10px;
+      background-color: #202123;
+    }
+
+    /* Giao diện thẻ kết quả tra cứu */
+    .search-results {
+      margin-top: 10px;
+      border-top: 1px solid #444654;
+      padding-top: 10px;
+    }
+
+    .search-results p {
+      margin: 5px 0;
+    }
+
+    /* Message Styling */
+    .message {
+      padding: 12px 16px;
+      margin: 8px 0;
+      border-radius: 8px;
+      line-height: 1.5;
+      font-size: 15px;
+    }
+
+    .bot-message {
+      background: #444654;
+      border-left: 4px solid #10a37f;
+    }
+
+    .user-message {
+      background: #343541;
+      border-left: 4px solid #007bff;
+    }
+
+    .message p {
+      margin: 0;
+      padding: 4px 0;
+    }
+
+    .message strong {
+      color: #10a37f;
+      font-weight: 600;
+    }
+
+    .message ul {
+      margin: 8px 0;
+      padding-left: 24px;
+    }
+
+    .message li {
+      margin: 6px 0;
+      color: #ececf1;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .nav {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .nav-links {
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+      }
+
+      .auth-buttons {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .content {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header Navigation -->
+  <header class="header">
+    <nav class="nav">
+      <a href="#" class="logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14h2v2h-2v-2zm0-10h2v8h-2V6z" fill="currentColor"/>
+        </svg>
+        TechFuture AI
+      </a>
+      <div class="nav-links">
+        <a href="#">Trang chủ</a>
+        <a href="#">Ngành nghề</a>
+        <a href="phongvan.html">ChatBot InTerView</a>
+        <a href="hosoai.html">CV Chatbot</a>
+        <a href="#">Liên hệ</a>
+      </div>
+      <div class="auth-buttons">
+        <button class="auth-button login">Đăng nhập</button>
+        <button class="auth-button signup">Đăng ký</button>
+      </div>
+    </nav>
+  </header>
+
+  <div class="main-container">
+    <div class="content">
+      <!-- Cột Chatbot -->
+      <div class="chat-column">
+        <h2>Chatbot Tư Vấn Nghề Nghiệp</h2>
+        <div id="chatbox"></div>
+        <div class="input-container">
+          <input type="text" id="userMessage" placeholder="Nhập câu hỏi về nghề nghiệp...">
+          <button id="send">Gửi</button>
+        </div>
+      </div>
+
+      <!-- Cột Tra Cứu -->
+      <div class="search-column">
+        <h2>Khu vực Tra Cứu</h2>
+        <div class="search-box">
+          <input type="text" id="searchQuery" placeholder="Nhập từ khóa để tra cứu...">
+          <button id="search">Tra cứu</button>
+          <div class="search-results" id="searchResults">
+            <p><em>Nhập từ khóa và nhấn "Tra cứu" để tìm kiếm thông tin.</em></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="importmap">
+    {
+      "imports": {
+        "@google/generative-ai": "https://esm.run/@google/generative-ai"
+      }
+    }
+  </script>
+
+  <script type="module">
+    import { GoogleGenerativeAI } from "@google/generative-ai";
+
+    const API_KEY = 'AIzaSyAXZGbJsHN_CJpbBmdDx18u-dBH3JsuBkQ'; // Thay thế bằng API key của bạn
+    const sheetsApiKey = 'AIzaSyB4hN-MhE5rmVM9Q_Ak4x2QkrXAI29-4e8'; // API key Google Sheets của bạn
+    const sheetId = '13s4nVD87Gk2xEkg_GsXcsbq7Q3IZx7f_nkQyvYKLgNk'; // ID Google Sheet chứa dữ liệu nghề nghiệp
+    const range = 'html data'; // Tên sheet chứa dữ liệu
+    const genAI = new GoogleGenerativeAI(API_KEY);
+
+    // Hàm lấy dữ liệu nghề nghiệp từ Google Sheets
+    async function fetchJobDataFromSheet() {
+      const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${sheetsApiKey}`;
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`Lỗi khi lấy dữ liệu: ${response.statusText}`);
+        }
+        const data = await response.json();
+        return data.values || []; // Dữ liệu dạng [[câu hỏi, câu trả lời], ...]
+      } catch (error) {
+        console.error("Có lỗi xảy ra:", error);
+        return [];
+      }
+    }
+
+    // Hàm lưu dữ liệu vào Google Sheets
+    async function saveDataToGoogleSheet(data) {
+      const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}:append?valueInputOption=USER_ENTERED&key=${sheetsApiKey}`;
+      const body = {
+        values: [data],
+      };
+
+      try {
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(body),
+        });
+
+        if (!response.ok) {
+          throw new Error(`Lỗi khi lưu dữ liệu: ${response.statusText}`);
+        }
+        console.log("Dữ liệu đã được lưu vào Google Sheet.");
+      } catch (error) {
+        console.error("Có lỗi xảy ra:", error);
+      }
+    }
+
+    async function setupChat() {
+      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+      const chat = model.startChat({
+        history: [
+          { role: "user", parts: [{ text: "Xin chào! Tôi muốn biết về các ngành nghề." }] },
+        ],
+        generationConfig: { maxOutputTokens: 100 },
+      });
+
+      // Add welcome message when chat initializes
+      const welcomeMessage = `
+        <div class="message bot-message">
+          <p><strong>Bot:</strong> Xin chào! Tôi là trợ lý AI tư vấn nghề nghiệp từ TechFuture AI. 
+          Tôi có thể giúp bạn:</p>
+          <ul style="margin-top: 8px; margin-left: 20px;">
+            <li>Tìm hiểu về các ngành nghề</li>
+            <li>Định hướng nghề nghiệp phù hợp</li>
+            <li>Tư vấn về con đường sự nghiệp</li>
+            <li>Cung cấp thông tin thị trường lao động</li>
+          </ul>
+          <p style="margin-top: 8px;">Bạn muốn tìm hiểu về vấn đề gì?</p>
+        </div>
+      `;
+      document.getElementById("chatbox").innerHTML = welcomeMessage;
+
+      const jobData = await fetchJobDataFromSheet();
+
+      // Add enter key handler for chat input
+      document.getElementById("userMessage").addEventListener("keypress", async (event) => {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          document.getElementById("send").click();
+        }
+      });
+
+      document.getElementById("send").addEventListener("click", async () => {
+        const userMessage = document.getElementById("userMessage").value;
+        if (!userMessage.trim()) return;
+        
+        // Add user message with new styling
+        document.getElementById("chatbox").innerHTML += `
+            <div class="message user-message">
+                <p><strong>Bạn:</strong> ${userMessage}</p>
+            </div>
+        `;
+        document.getElementById("userMessage").value = '';
+
+        // Tìm câu trả lời từ Google Sheets
+        let responseText = jobData.find(([question]) => userMessage.includes(question))?.[1];
+
+        // Nếu không có câu trả lời từ Google Sheets, sử dụng AI
+        if (!responseText) {
+          const result = await chat.sendMessage(userMessage);
+          const response = await result.response;
+          responseText = response.text();
+        }
+
+        // Update bot response with new styling
+        document.getElementById("chatbox").innerHTML += `
+            <div class="message bot-message">
+                <p><strong>Bot:</strong> ${responseText}</p>
+            </div>
+        `;
+        document.getElementById("chatbox").scrollTop = document.getElementById("chatbox").scrollHeight;
+
+        // Lưu dữ liệu câu hỏi và câu trả lời vào Google Sheets
+        await saveDataToGoogleSheet([userMessage, responseText]);
+      });
+    }
+
+    setupChat();
+
+    // Giả lập chức năng tra cứu
+    document.getElementById("search").addEventListener("click", () => {
+      const query = document.getElementById("searchQuery").value;
+      if (query.trim()) {
+        document.getElementById("searchResults").innerHTML = `
+          <p><strong>Kết quả tìm kiếm cho:</strong> "${query}"</p>
+          <p><a href="https://www.google.com/search?q=${encodeURIComponent(query)}" target="_blank">Xem trên Google</a></p>
+        `;
+      } else {
+        document.getElementById("searchResults").innerHTML = `<p>Vui lòng nhập từ khóa.</p>`;
+      }
+    });
+  </script>
+</body>
+</html>
