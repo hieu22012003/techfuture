@@ -11,60 +11,74 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      transition: all 0.3s ease;
     }
 
-    /* Full Screen Body Style */
+    /* Dark Mode Body Style */
     body {
       font-family: Arial, sans-serif;
       background-color: #121212;
-      color: #ffffff;
+      color: #e0e0e0;
       display: flex;
       height: 100vh;
+      overflow: hidden;
     }
 
     /* Left Column for Notes */
     #notes {
-      width: 400px;
+      width: 350px;
       background: #1e1e1e;
-      padding: 20px;
+      padding: 15px;
       overflow-y: auto;
-      border-right: 1px solid #444;
+      border-right: 1px solid #333;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    }
+
+    h3 {
+      margin-bottom: 10px;
+      color: #f0f0f0;
+      font-size: 16px;
+      font-weight: 500;
     }
 
     #note-input {
-      flex-grow: 1; /* Allow textarea to grow */
+      flex-grow: 1;
       margin-bottom: 10px;
       border: 1px solid #444;
+      border-radius: 4px;
       padding: 10px;
-      resize: none; /* Prevent resizing */
+      resize: none;
       font-size: 14px;
-      background-color: #333333;
-      color: #ffffff;
+      background: #2d2d2d;
+      color: #e0e0e0;
     }
 
     #export-button {
-      padding: 10px;
+      padding: 8px;
       border: none;
-      background: #4CAF50;
-      color: #fff;
+      border-radius: 4px;
+      background: #ff9800;
+      color: #121212;
       cursor: pointer;
       font-size: 14px;
-      margin-top: 10px;
+      font-weight: 500;
+      transition: all 0.2s;
     }
 
     #export-button:hover {
-      background: #45a049;
+      background: #ffb74d;
+      transform: translateY(-2px);
     }
 
     /* Chat Container */
     #chat-container {
       flex: 1;
       height: 100%;
-      padding: 20px;
-      background: #1e1e1e;
+      padding: 15px;
+      background: #1a1a1a;
       display: flex;
       flex-direction: column;
     }
@@ -73,109 +87,146 @@
     #chat-output {
       flex: 1;
       overflow-y: auto;
-      border: 1px solid #444;
-      padding: 20px;
-      background: #333333;
-      margin-bottom: 10px;
+      border: 1px solid #333;
+      border-radius: 6px;
+      padding: 15px;
+      background: #242424;
+      margin-bottom: 15px;
+      scrollbar-width: thin;
+      scrollbar-color: #555 #242424;
+    }
+
+    #chat-output::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    #chat-output::-webkit-scrollbar-thumb {
+      background-color: #555;
+      border-radius: 6px;
     }
 
     /* Chat Input and Buttons */
-    #chat-input {
-      width: calc(100% - 200px); /* Adjusted for buttons */
-      padding: 10px; /* Smaller padding */
-      border: 1px solid #444;
-      margin-right: 10px;
-      height: 40px; /* Adjust height */
-      background-color: #333333;
-      color: #ffffff;
+    .input-area {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
     }
 
-    #send-button, #clear-button, #speech-button {
-      padding: 10px 15px; /* Smaller buttons */
-      border: none;
-      background-color: #4CAF50;
-      color: #fff;
-      cursor: pointer;
-      font-size: 14px;
+    #chat-input {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #444;
+      border-radius: 4px;
+      background: #2d2d2d;
+      color: #e0e0e0;
+      height: 40px;
+    }
+
+    .button-group {
+      display: flex;
       margin-left: 10px;
     }
 
-    #send-button:hover, #clear-button:hover, #speech-button:hover {
-      background: #45a049;
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 4px;
+      background: #ff9800;
+      color: #121212;
+      cursor: pointer;
+      font-size: 14px;
+      margin-left: 5px;
+      transition: all 0.2s;
+    }
+
+    button:hover {
+      background: #ffb74d;
+      transform: translateY(-2px);
+    }
+
+    button .material-symbols-outlined {
+      font-size: 18px;
     }
 
     /* Chat Messages */
     #chat-output p {
-      margin: 10px 0;
-      padding: 10px;
-      border-radius: 5px;
-      line-height: 1.4;
-      max-width: 75%;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.3s ease;
-    }
-
-    #chat-output p.show {
-      opacity: 1;
-      transform: translateY(0);
+      margin: 8px 0;
+      padding: 10px 12px;
+      border-radius: 10px;
+      max-width: 85%;
+      word-wrap: break-word;
     }
 
     #chat-output p.user-message {
-      text-align: right;
-      background: #4CAF50;
-      color: #fff;
+      margin-left: auto;
+      background: #ff9800;
+      color: #121212;
+      border-bottom-right-radius: 0;
     }
 
     #chat-output p.ai-message {
-      text-align: left;
-      background: #444;
-      color: #ffffff;
+      margin-right: auto;
+      background: #424242;
+      color: #f0f0f0;
+      border-bottom-left-radius: 0;
     }
 
     /* Speech rate control */
     #speech-control {
       display: flex;
-      margin-left: 20px;
-      justify-content: center;
       align-items: center;
-      margin-top: 10px;
+      margin-left: 10px;
     }
 
     #speech-control label {
-      margin-right: 10px;
-    }
-
-    #speech-control input[type="range"] {
-      width: 150px;
+      margin-right: 5px;
+      color: #e0e0e0;
     }
 
     #speech-rate {
-      color: #fff;
+      width: 80px;
+      accent-color: #ff9800;
+    }
+
+    #rate-display {
+      min-width: 25px;
+      color: #e0e0e0;
+      font-size: 12px;
+      text-align: center;
     }
   </style>
 </head>
 <body>
   <div id="notes">
     <h3>Ghi Chú</h3>
-    <textarea id="note-input" rows="10" placeholder="Ghi chú của bạn ở đây..."></textarea>
+    <textarea id="note-input" placeholder="Ghi chú của bạn ở đây..."></textarea>
     <button id="export-button">Xuất Ghi Chú</button>
   </div>
+  
   <div id="chat-container">
-    <h3>CHATBOT INTERVIEW TECHJOB</h3>
+    <h3>PHỎNG VẤN TECHJOB AI</h3>
     <div id="chat-output"></div>
-    <div style="display: flex;">
+    
+    <div class="input-area">
       <input type="text" id="chat-input" placeholder="Nhập tin nhắn tới TechFuture AI..." />
-      <button id="send-button"><span class="material-symbols-outlined">Send</span></button>
-      <button id="clear-button">Clear Chat</button>
-      <button id="speech-button"><span class="material-symbols-outlined">Mic</span></button>
-      <div id="speech-control"> 
-        <label for="speech-rate"><span class="material-symbols-outlined">speed</span></label>
-        <input type="range" id="speech-rate" min="0.5" max="3.0" step="0.1" value="1">
-        <span id="rate-display"></span>
+      
+      <div class="button-group">
+        <button id="send-button" title="Gửi"><span class="material-symbols-outlined">send</span></button>
+        <button id="speech-button" title="Nói"><span class="material-symbols-outlined">mic</span></button>
+        <button id="clear-button" title="Xóa chat">Clear</button>
+      </div>
+      
+      <div id="speech-control">
+        <label for="speech-rate" title="Tốc độ nói"><span class="material-symbols-outlined">speed</span></label>
+        <input type="range" id="speech-rate" min="0.5" max="2.0" step="0.1" value="1">
+        <span id="rate-display">1.0</span>
       </div>
     </div>
   </div>
+  
   <script type="importmap">
     {
       "imports": {
@@ -183,19 +234,11 @@
       }
     }
   </script>
+  
   <script type="module">
     import { GoogleGenerativeAI } from "@google/generative-ai";
-    import { careerQuestions } from './data AI/questions.js';
-    import { questionIT } from './data AI/questionIT.js';
-// Example usage:
-    const technicalQuestions = questionIT.technical.programming;
-    const careerAdvice = questionIT.suggestions.frontend;
-// Example usage: question
-    const greeting = careerQuestions.prompts.greeting;
-    const initialQuestions = careerQuestions.initial;
-    const itQuestions = careerQuestions.industrySpecific.it;
-// API KEY 
-    const API_KEY = "AIzaSyBu9qXzymzcblC_kTx3Cpbr1bNENt-rbqo"; // Example key
+
+    const API_KEY = "AIzaSyBu9qXzymzcblC_kTx3Cpbr1bNENt-rbqo"; 
     const genAI = new GoogleGenerativeAI(API_KEY);
 
     const model = genAI.getGenerativeModel({
@@ -212,15 +255,26 @@
       responseMimeType: "text/plain",
     };
 
+    // Update rate display
+    const rateSlider = document.getElementById('speech-rate');
+    const rateDisplay = document.getElementById('rate-display');
+    
+    rateSlider.addEventListener('input', () => {
+      rateDisplay.textContent = parseFloat(rateSlider.value).toFixed(1);
+    });
+    
+    // Initialize rate display
+    rateDisplay.textContent = parseFloat(rateSlider.value).toFixed(1);
+
     // Hàm chuyển văn bản thành âm thanh
     function textToSpeech(text) {
       const synth = window.speechSynthesis;
       const utterance = new SpeechSynthesisUtterance(text);
       const voices = synth.getVoices();
-      const VietnameseVoice = voices.find(voice => voice.lang === 'vi-VN');
+      const vietnameseVoice = voices.find(voice => voice.lang === 'vi-VN');
 
-      if (VietnameseVoice) {
-        utterance.voice = VietnameseVoice;
+      if (vietnameseVoice) {
+        utterance.voice = vietnameseVoice;
       }
       const speechRate = document.getElementById('speech-rate').value;
       utterance.rate = speechRate;
@@ -230,20 +284,35 @@
 
     // Hàm chuyển giọng nói thành văn bản
     function startSpeechRecognition() {
+      const speechButton = document.getElementById('speech-button');
+      speechButton.style.background = '#e65100';
+      speechButton.innerHTML = '<span class="material-symbols-outlined">record_voice_over</span>';
+      
       const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-      recognition.lang = 'vi-VN'; // Ngôn ngữ nhận diện
+      recognition.lang = 'vi-VN';
       recognition.interimResults = false;
 
       recognition.onresult = (event) => {
-        const transcript = event.results[0][0].transcript; // Lấy văn bản từ kết quả
-        document.getElementById('chat-input').value = transcript; // Điền vào input
+        const transcript = event.results[0][0].transcript;
+        document.getElementById('chat-input').value = transcript;
+        setTimeout(() => sendMessage(), 500);
       };
 
       recognition.onerror = (event) => {
         console.error('Recognition error: ', event.error);
+        resetSpeechButton();
       };
 
-      recognition.start(); // Bắt đầu nhận diện
+      recognition.onend = () => {
+        resetSpeechButton();
+      };
+      
+      function resetSpeechButton() {
+        speechButton.style.background = '#ff9800';
+        speechButton.innerHTML = '<span class="material-symbols-outlined">mic</span>';
+      }
+
+      recognition.start();
     }
 
     // Hàm thực thi để bắt đầu phiên trò chuyện
@@ -262,8 +331,13 @@
         ],
       });
 
-      const result = await chatSession.sendMessage(userMessage);
-      return result.response.text(); // Return the response text from AI
+      try {
+        const result = await chatSession.sendMessage(userMessage);
+        return result.response.text();
+      } catch (error) {
+        console.error('Error sending message:', error);
+        return "Có lỗi xảy ra khi xử lý yêu cầu của bạn. Vui lòng thử lại sau.";
+      }
     }
 
     async function sendMessage() {
@@ -271,62 +345,78 @@
       const chatOutput = document.getElementById('chat-output');
 
       const msg = chatInput.value.trim();
-      if (!msg) return; // Don't send empty messages
+      if (!msg) return;
 
       // Create and append user message
       const userMessage = document.createElement('p');
       userMessage.classList.add('user-message');
       userMessage.textContent = msg;
       chatOutput.appendChild(userMessage);
-      userMessage.classList.add('show');
-      chatInput.value = ''; // Clear input
+      chatInput.value = '';
 
       // Show thinking status
       const thinkingMessage = document.createElement('p');
-      thinkingMessage.textContent = 'Vui lòng chờ ...';
+      thinkingMessage.classList.add('ai-message');
+      thinkingMessage.textContent = 'AI đang suy nghĩ...';
       chatOutput.appendChild(thinkingMessage);
-      chatOutput.scrollTop = chatOutput.scrollHeight; // Auto scroll to the bottom
+      chatOutput.scrollTop = chatOutput.scrollHeight;
 
       // Get AI response
-      const aiResponse = await run(msg);
-      chatOutput.removeChild(thinkingMessage); // Remove thinking status
+      try {
+        const aiResponse = await run(msg);
+        chatOutput.removeChild(thinkingMessage);
 
-      // Create and append AI message
-      const aiMessage = document.createElement('p');
-      aiMessage.classList.add('ai-message');
-      aiMessage.textContent = aiResponse;
-      chatOutput.appendChild(aiMessage);
-      aiMessage.classList.add('show');
-      chatOutput.scrollTop = chatOutput.scrollHeight; // Auto scroll to the bottom
+        // Create and append AI message
+        const aiMessage = document.createElement('p');
+        aiMessage.classList.add('ai-message');
+        aiMessage.textContent = aiResponse;
+        chatOutput.appendChild(aiMessage);
+        chatOutput.scrollTop = chatOutput.scrollHeight;
 
-      // Speak the AI response
-      textToSpeech(aiResponse);
+        // Speak the AI response
+        textToSpeech(aiResponse);
+      } catch (error) {
+        chatOutput.removeChild(thinkingMessage);
+        const errorMessage = document.createElement('p');
+        errorMessage.classList.add('ai-message');
+        errorMessage.textContent = "Có lỗi xảy ra. Vui lòng thử lại.";
+        chatOutput.appendChild(errorMessage);
+        chatOutput.scrollTop = chatOutput.scrollHeight;
+      }
     }
 
     document.getElementById('send-button').addEventListener('click', sendMessage);
+    
     document.getElementById('clear-button').addEventListener('click', () => {
       document.getElementById('chat-output').innerHTML = '';
     });
 
     document.getElementById('chat-input').addEventListener('keypress', (e) => {
       if (e.key === 'Enter') {
-        e.preventDefault(); // Prevent newline
+        e.preventDefault();
         sendMessage();
       }
     });
 
-    // Hàm bắt đầu nhận diện giọng nói khi nhấn nút
     document.getElementById('speech-button').addEventListener('click', startSpeechRecognition);
 
-    // Export notes function
     document.getElementById('export-button').addEventListener('click', () => {
       const notes = document.getElementById('note-input').value;
       const blob = new Blob([notes], { type: 'text/plain' });
       const link = document.createElement('a');
       link.href = URL.createObjectURL(blob);
-      link.download = 'ghi_chu.txt';
+      link.download = 'ghi_chu_phong_van.txt';
       link.click();
-      URL.revokeObjectURL(link.href); // Clean up
+      URL.revokeObjectURL(link.href);
+    });
+
+    // Hiển thị thông báo chào mừng
+    window.addEventListener('DOMContentLoaded', () => {
+      const chatOutput = document.getElementById('chat-output');
+      const welcomeMessage = document.createElement('p');
+      welcomeMessage.classList.add('ai-message');
+      welcomeMessage.textContent = "Chào mừng bạn đến với Phòng phỏng vấn ảo! Hãy cho tôi biết bạn muốn ứng tuyển vị trí nào.";
+      chatOutput.appendChild(welcomeMessage);
     });
   </script>
 </body>

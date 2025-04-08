@@ -259,14 +259,12 @@
         TechFuture AI
       </a>
       <div class="nav-links">
-        <a href="#">Trang chủ</a>
-        <a href="#">Ngành nghề</a>
+        <a href="AIcv.html">ChatBot CV Tự Động</a>
         <a href="phongvan.html">ChatBot InTerView</a>
-        <a href="hosoai.html">CV Chatbot</a>
-        <a href="#">Liên hệ</a>
+        <a href="hosoai.html">Chatbot Tuyển Dụng</a>
       </div>
       <div class="auth-buttons">
-        <button class="auth-button login">Đăng nhập</button>
+       <a href="login.html"> <button class="auth-button login">Đăng nhập</button></a>
         <button class="auth-button signup">Đăng ký</button>
       </div>
     </nav>
@@ -298,6 +296,7 @@
     </div>
   </div>
 
+  <!-- Import Google Generative AI with fallback -->
   <script type="importmap">
     {
       "imports": {
@@ -305,6 +304,7 @@
       }
     }
   </script>
+  <script nomodule src="https://unpkg.com/es-module-shims@1.8.0/dist/es-module-shims.js"></script>
 
   <script type="module">
     import { GoogleGenerativeAI } from "@google/generative-ai";
